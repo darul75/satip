@@ -161,15 +161,39 @@ for (var i = 0; i<mapSize; i++) {
   // MAP key one
   console.log('ctrlByte ' + ctrlByte);
   console.log('data type ' + type);
-  console.log('size ' + size);
 
-  start += 1;
+  if (type !== 'extended') {
+    console.log('size ' + size);
 
+    start += 1;
 
-  var content = decodeByType(type, start, size);
-  console.log(content);
+    var content = decodeByType(type, start, size);
+    console.log(content);
 
-  start += size;
+    start += size;
+  }
+  else {
+
+    start += 1;
+
+    ctrlByte = buffer[start],
+
+    var idx = ctrlByte >> 5 + 7;
+
+    type = types[idx],
+    size = ctrlByte & 0x1f;
+
+    // MAP key one
+    console.log('ctrlByte ' + ctrlByte);
+    console.log('data type ' + type);
+
+    start += 1;
+
+    var content = decodeByType(type, start, size);
+    console.log(content);
+
+    start += size;
+  }
 
 }
 
