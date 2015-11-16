@@ -176,9 +176,9 @@ for (var i = 0; i<mapSize; i++) {
 
     start += 1;
 
-    ctrlByte = buffer[start],
+    ctrlByte = buffer[start];
 
-    var idx = ctrlByte >> 5 + 7;
+    var idx = ctrlByte + 7;
 
     type = types[idx],
     size = ctrlByte & 0x1f;
